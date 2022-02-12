@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Javascript Events</title>
+    </head>
+    <style>
+        body{
+            background: #eee;
+        }
+        form{
+            max-width: 200px;
+            margin: 40px auto;
+            background: white;
+            padding: 10px;
+        }
+        input{
+            display:block;
+            margin:10px auto;
+            padding: 4px;
+        }
+        .success{
+            border: 2px solid #95CD41;
+        }
+        .fail{
+            border: 2px solid #FC4F4F;
+        }
+        .filtered{
+            display: none;
+        }
+    </style>
+    <body>
+
+        <form class="signup-form">
+            <input type="text" id="username" placeholder="username">
+            <input type="submit" value="submit">
+            <div class="error"></div>
+        </form>
+        
+        <script>
+            const form = document.querySelector(".signup-form");
+            const error = document.querySelector(".error");
+
+            const usernamePattern = /^[a-zA-z]{6,12}$/;
+            form.addEventListener("submit",(e)=>{
+                e.preventDefault();
+                const username = form.username.value;
+
+                if(usernamePattern.test(username) ){
+                    error.style.color="green";
+                    error.textContent ="Username is valid!";
+                }else{
+                    error.style.color="red";
+                    error.textContent = "Username is invalid, please enter again.";
+                }
+            });
+
+            // live feedback
+
+            
+            form.username.addEventListener("keyup", (e)=>{
+                
+                    if(usernamePattern.test(e.target.value)){
+                        form.username.setAttribute('class', "success");
+                    }else{
+                        form.username.setAttribute('class', "fail");
+                    }
+            });
+
+        </script>
+    </body>
+</html>

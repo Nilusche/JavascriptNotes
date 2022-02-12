@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript basics</title>
+</head>
+<body>
+    <script src="app.js"></script>
+    <script>
+        const title = "Best Reads of 2019";
+        const author = "Mario";
+        const likes = 30;
+
+        let result = "The Blog is called "+ title + " by " + author + " and has "+ likes+ " likes";
+        
+        let templateret = `The Blog is called ${title} by ${author} and has ${likes} likes`;
+        
+        //console.log(result);
+        //console.log(templateret);
+
+        //loops
+
+        for(let i  = 0; i<5; i++){
+
+        }
+
+        //functions 
+        function greet(){
+            console.log("Hello there 1");
+
+        }
+        //greet();
+        const speak  = function(){
+            console.log("Hello there 2")
+        };
+        //speak();
+
+        const anotherone = function(name, lastname){
+            return String(name +" "+ lastname);
+        };
+        
+
+        // arrow functions (lambdas)
+        const calcArea = (name, lastname)=>{
+            return String(name +" "+ lastname);
+        };
+
+
+        let user  = {
+            name : "John",
+            lastname: "Doe",
+            age: 50,
+            eyeColor: "blue",
+            fullName: function(){
+                return this.name + " " + this.lastname;
+            }
+        };
+
+        console.log(user.fullName());
+        
+    </script>
+</body>
+</html>

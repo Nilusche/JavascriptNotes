@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Interactions</title>
+</head>
+<body>
+    <div>
+        <p>Hello World</p>
+        <p>Lorem ipsum</p>
+        <div class="content">Content</div>
+        <p class="error">this is an error message</p>
+    </div>
+
+    <script>
+       /* const para = document.querySelector('div.error');
+        const allpara = document.querySelectorAll('p');
+        console.log(allpara);*/
+
+        const para = document.querySelector('p');
+        para.innerText = "How is this possible";
+        
+
+        let content = document.querySelector(".content");
+        const people =["Mario", "luigi", "Yoshi"];
+        people.forEach(person =>{
+            content.innerHTML+= `<p>${person}</p>`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Quiz</title>
+</head>
+<body>
+    <div class="intro py-3 bg-white text-center">
+        <div class="container">
+            <h2 class="text-success display-3 my-4">Quiz</h2>
+        </div>
+    </div>
+
+    <div class="result py-4 d-none bg-light text-center">
+        <div class="container lead">
+            <p>
+                You are
+                <span class="text-success display-4 p-3">
+                    0%
+                </span>
+                correct
+            </p>
+        </div>
+    </div>
+
+    <div class="quiz py-4 bg-success">
+        <div class="container">
+            <h2 class="my-5 text-white">Questions ...</h2>
+            <form class="quiz-form text-light">
+                <div class="my-5">
+                    <p class="lead font-weight-normal">
+                        1. What does DOM in javascript stand for?
+                    </p>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q1"  value="A" checked autocomplete="off">
+                        <label class="form-check-label">Directed Object Mass</label>
+                        
+                    </div>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q1"  value="B">
+                        <label class="form-check-label">Document Object Model</label>
+                    </div>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q1"  value="C">
+                        <label class="form-check-label">Distributive Object Model</label>
+                    </div>
+                </div>
+                <div class="my-5">
+                    <p class="lead font-weight-normal">
+                        1. What is not a Keyboardevent-type?
+                    </p>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q2"  value="A" checked>
+                        <label class="form-check-label">KeyDown</label>
+                        
+                    </div>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q2"  value="B">
+                        <label class="form-check-label">Keypress</label>
+                    </div>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q2"  value="C">
+                        <label class="form-check-label">Keyup</label>
+                    </div>
+                </div>
+                <div class="my-5">
+                    <p class="lead font-weight-normal">
+                        1. Why is "var" in javascsript rarely used anymore
+                    </p>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q3"  value="A" checked>
+                        <label class="form-check-label">"var" is deprecated and indicates a global variable</label>
+                        
+                    </div>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q3"  value="B">
+                        <label class="form-check-label">"var" is stupid</label>
+                    </div>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q3"  value="C">
+                        <label class="form-check-label">There is no such thing as "var" </label>
+                    </div>
+                </div>
+                <div class="my-5">
+                    <p class="lead font-weight-normal">
+                        1. What is the correct way to use dom to get the class "green" of an input-html-tag
+                    </p>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q4"  value="A" checked>
+                        <label class="form-check-label">document.getClass("green")</label>
+                        
+                    </div>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q4"  value="B">
+                        <label class="form-check-label">document.querySelector("green")</label>
+                    </div>
+                    <div class="form-check my-2 text-white-50">
+                        <input type="radio" name="q4"  value="C">
+                        <label class="form-check-label">document.getElementbyClass("green") </label>
+                    </div>
+                </div>
+                <button class="btn btn-light">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const correctanswers= ["B", "C", "A", "C"];
+        const form = document.querySelector(".quiz-form");
+        const result = document.querySelector(".result");
+        form.addEventListener("submit", (e)=>{
+            e.preventDefault();
+            let score = 0;
+            const userAnswers = [form.q1.value, form.q2.value, form.q3.value, form.q4.value];
+            userAnswers.forEach((answer, index)=>{
+                if(answer === correctanswers[index])
+                    score+=25;
+            });
+
+            scrollTo(0,0);
+            result.classList.remove("d-none");
+
+            let output = 0;
+            const timer = setInterval(()=>{
+                result.querySelector("span").textContent= `${output}%`;
+                console.log(output);
+                if(output === score){
+                    clearInterval(timer);
+                }else{
+                    output++;
+                }
+            }, 15);
+            
+        });
+    </script>
+
+</body>
+</html>
