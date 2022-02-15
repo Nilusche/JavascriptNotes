@@ -1,0 +1,26 @@
+*{
+    background-color: #2f3037;
+}
+
+.header{
+    color:#eee;
+}
+
+#array{
+    display: grid;
+    grid-template-columns: repeat(20,50px);
+    height:500px;
+    grid-gap: 5px;;
+    margin-left: 20px;
+    margin-top:20px;
+    transform: scaleY(-1);
+    transition:0.3s ease-in;
+}
+
+.item{
+    background-color: #FF6464;
+    color:#eee;
+    transform: scaleY(-1);
+    text-align: center;
+    transition:0.3s ease-in;
+}
