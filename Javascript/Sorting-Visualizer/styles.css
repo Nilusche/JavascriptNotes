@@ -5,6 +5,9 @@
 .header{
     color:#eee;
 }
+p +button, button+button{
+    color:#eee;
+}
 
 #array{
     display: grid;
@@ -14,7 +17,8 @@
     margin-left: 20px;
     margin-top:20px;
     transform: scaleY(-1);
-    transition:0.3s ease-in;
+    justify-content: center;
+    
 }
 
 .item{
@@ -22,5 +26,8 @@
     color:#eee;
     transform: scaleY(-1);
     text-align: center;
-    transition:0.3s ease-in;
+    transition:0.1s ease;
+}
+#speed{
+    transform: rotateY(180deg);
 }

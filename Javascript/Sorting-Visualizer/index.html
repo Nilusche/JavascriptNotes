@@ -12,11 +12,16 @@
 <body>
     <br />
     <p class="header">Bubble Sort</p>
-    <input id=speed type="range" min="100" max="1000", value="500" step="100">
+    <button id="bubblesort">Bubblesort</button>
+    <button id="bogosort">Bogosort</button>
+    <button onclick="generatearray()">Generate Array</button>
+    <input id=speed type="range" min="50" max="1000", value="300" step="50" onchange="changespeed(this.value)">
     <div id="array">
     </div>
+    
    <script src="bubblesort.js"></script>
    <script src="interface.js"></script>
+
 </body>
   
 </html>
