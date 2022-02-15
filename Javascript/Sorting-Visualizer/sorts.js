@@ -5,10 +5,12 @@ const container = document.querySelector("#array");
 const bubble = document.querySelector("#bubblesort");
 const bogo = document.querySelector("#bogosort");
 const selection = document.querySelector("#selectionsort");
+const quicksort = document.querySelector("#quicksort");
 bubble.addEventListener("click",()=>{
     bubble.disabled=true;
     bogo.disabled=true;
     selection.disabled=true;
+    quicksort.disabled=true;
     bubblesort();
     
 });
@@ -17,6 +19,7 @@ bogo.addEventListener("click", ()=>{
     bubble.disabled=true;
     bogo.disabled=true;
     selection.disabled=true;
+    quicksort.disabled=true;
     bogosort();
     
 });
@@ -25,8 +28,17 @@ selection.addEventListener("click", ()=>{
     bubble.disabled=true;
     bogo.disabled=true;
     selection.disabled=true;
+    quicksort.disabled=true;
     selectionsort();
 });
+
+quicksort.addEventListener("click",()=>{
+    bubble.disabled=true;
+    bogo.disabled=true;
+    selection.disabled=true;
+    quicksort.disabled=true;
+    quicksortImpl();
+})
 
 
 
@@ -35,7 +47,7 @@ function changespeed(val){
 }
 
 
-function generatearray(num=20){
+function generatearray(num=50){
     container.innerHTML="";
     for(let i=0; i<num; i+=1){
         var value=Math.ceil(Math.random()*100);
@@ -48,16 +60,21 @@ function generatearray(num=20){
     }
 }
 
-function swap(element1, element2){
-    
-    
+function swap(element1, element2, changecolor=false){
+
     setTimeout(()=>{
         tmp_height = element1.style.height;
         tmp_value = element1.innerText;
+        tmp_background = element1.style.backgroundColor;
         element1.style.height = element2.style.height;
         element1.innerText= element2.innerText;
         element2.style.height = tmp_height;
         element2.innerText = tmp_value;  
+        if(changecolor){
+            element1.style.backgroundColor = element2.style.backgroundColor;
+            element2.style.backgroundColor = tmp_background;
+        }
+       
     }, 25);
 }
 
@@ -100,8 +117,8 @@ async function bogosort(){
             return;
         let a = Math.floor(Math.random() * items.length);
         let b = Math.floor(Math.random() * items.length);
-        items[a].style.backgroundColor = "#126E82";
-        items[b].style.backgroundColor = "#126E82";
+        items[a].style.backgroundColor = "#219F94";
+        items[b].style.backgroundColor = "#219F94";
         await new Promise((resolve)=>
             setTimeout(()=>{
                 resolve();
@@ -125,7 +142,7 @@ async function selectionsort(){
     for(let i =0; i<items.length-1; i++){
         let min = i;
 
-        items[i].style.backgroundColor ="#F1D00A";
+        items[i].style.backgroundColor ="#126E82";
 
         await new Promise((resolve)=>
             setTimeout(()=>{
@@ -139,7 +156,7 @@ async function selectionsort(){
             let current_min = parseInt(items[min].innerText);
             let current_min_index = min;
 
-            items[j].style.backgroundColor = "#F1D00A";
+            items[j].style.backgroundColor = "#126E82";
             await new Promise((resolve)=>
                 setTimeout(()=>{
                     resolve();
@@ -166,4 +183,84 @@ async function selectionsort(){
     items[items.length-1].style.backgroundColor = "#95CD41";
 }
 
+
+async function quicksortImpl(){
+    let items = document.querySelectorAll(".item");
+        
+    quicksort(items, 0 , parseInt(items.length-1)); 
+    
+
+    async function quicksort(items, low, high){
+        if(parseInt(low)<parseInt(high)){
+
+            const pivot = parseInt(items[high].innerText);
+            items[high].style.backgroundColor = "#5800FF";
+            let i = parseInt(low) ;
+
+            var marked=[];
+            for(let j = low; j<high; j++){
+                let val = parseInt(items[j].innerText);
+                items[j].style.backgroundColor = "#eeeeee";
+                await new Promise((resolve)=>
+                    setTimeout(()=>{
+                        resolve();
+                    },delay-50)
+                );
+                items[j].style.backgroundColor = "#FF6464";
+
+                if(val<pivot){
+                    items[i].style.backgroundColor = "#219F94";    
+                    swap(items[i], items[j],false);    
+                    items[j].style.backgroundColor = "#F1D00A";   
+                    i++;    
+                    
+                }else{
+                    items[j].style.backgroundColor = "#F1D00A";
+                }
+                marked.push(items[j]);
+            }
+            swap(items[i], items[high],true);
+            let partitionIndex = parseInt(i);
+
+            marked.push(items[i]);
+            marked.push(items[high]);
+
+            marked.forEach(element => {
+                element.style.backgroundColor =  "#FF6464";
+            });
+
+
+
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            );
+
+            var promise = Promise.all(quicksort(items, low, partitionIndex-1),quicksort(items, partitionIndex +1, high));
+            promise.then(function(){
+                for(let i=low; i<=high; i++){
+                    items[i].style.backgroundColor ="#95CD41";
+
+                }
+            })
+            
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            );
+            
+            
+        }
+    }
+
+    
+
+}
+
 generatearray();
+
+
+
+
