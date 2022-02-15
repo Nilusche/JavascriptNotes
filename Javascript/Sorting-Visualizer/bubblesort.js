@@ -4,9 +4,11 @@ var stopExec=false;
 const container = document.querySelector("#array");
 const bubble = document.querySelector("#bubblesort");
 const bogo = document.querySelector("#bogosort");
+const selection = document.querySelector("#selectionsort");
 bubble.addEventListener("click",()=>{
     bubble.disabled=true;
     bogo.disabled=true;
+    selection.disabled=true;
     bubblesort();
     
 });
@@ -14,9 +16,19 @@ bubble.addEventListener("click",()=>{
 bogo.addEventListener("click", ()=>{  
     bubble.disabled=true;
     bogo.disabled=true;
+    selection.disabled=true;
     bogosort();
     
 });
+
+selection.addEventListener("click", ()=>{
+    bubble.disabled=true;
+    bogo.disabled=true;
+    selection.disabled=true;
+    selectionsort();
+});
+
+
 
 function changespeed(val){
     delay = parseInt(val);
@@ -108,6 +120,50 @@ async function bogosort(){
     }
 }
 
+async function selectionsort(){
+    items= document.querySelectorAll(".item");
+    for(let i =0; i<items.length-1; i++){
+        let min = i;
+
+        items[i].style.backgroundColor ="#F1D00A";
+
+        await new Promise((resolve)=>
+            setTimeout(()=>{
+                resolve();
+            },delay)
+        );
+
+        items[i].style.backgroundColor = "#FF6464";
+        for(let j = i+1; j<items.length; j++){
+            let val = parseInt(items[j].innerText);
+            let current_min = parseInt(items[min].innerText);
+            let current_min_index = min;
+
+            items[j].style.backgroundColor = "#F1D00A";
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            );
+            items[j].style.backgroundColor = "#FF6464";
+
+            if(val<current_min){
+                items[min].style.backgroundColor ="#5800FF";
+                min = j;
+            }
+            if(parseInt(items[min].innerText)!=current_min){
+                items[current_min_index].style.backgroundColor ="#FF6464";
+                items[min].style.backgroundColor= "#5800FF";
+            }
+
+        }
+        swap(items[min], items[i])
+        items[min].style.backgroundColor = "#FF6464";
+        items[i].style.backgroundColor = "#95CD41";
+        
+
+    }
+    items[items.length-1].style.backgroundColor = "#95CD41";
+}
 
 generatearray();
-
