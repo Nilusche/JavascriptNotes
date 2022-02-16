@@ -7,12 +7,14 @@ const bogo = document.querySelector("#bogosort");
 const selection = document.querySelector("#selectionsort");
 const quicksort = document.querySelector("#quicksort");
 const insertion =  document.querySelector("#insertionsort");
+const gnome = document.querySelector("#gnomesort");
 bubble.addEventListener("click",()=>{
     bubble.disabled=true;
     bogo.disabled=true;
     selection.disabled=true;
     quicksort.disabled=true;
     insertion.disabled=true;
+    gnome.disabled =true;
     bubblesort();
     
 });
@@ -23,6 +25,7 @@ bogo.addEventListener("click", ()=>{
     selection.disabled=true;
     quicksort.disabled=true;
     insertion.disabled=true;
+    gnome.disabled =true;
     bogosort();
     
 });
@@ -33,6 +36,7 @@ selection.addEventListener("click", ()=>{
     selection.disabled=true;
     quicksort.disabled=true;
     insertion.disabled=true;
+    gnome.disabled =true;
     selectionsort();
 });
 
@@ -42,6 +46,7 @@ quicksort.addEventListener("click",()=>{
     selection.disabled=true;
     quicksort.disabled=true;
     insertion.disabled=true;
+    gnome.disabled =true;
     quicksortImpl();
 });
 
@@ -51,8 +56,20 @@ insertion.addEventListener("click", ()=>{
     selection.disabled=true;
     quicksort.disabled=true;
     insertion.disabled=true;
+    gnome.disabled =true;
     insertionsort();
-})
+});
+
+gnome.addEventListener("click", ()=>{
+    bubble.disabled=true;
+    bogo.disabled=true;
+    selection.disabled=true;
+    quicksort.disabled=true;
+    insertion.disabled=true;
+    gnome.disabled =true;
+    gnomesort();
+});
+
 
 
 function changespeed(val){
@@ -324,6 +341,37 @@ async function insertionsort(){
 
         
     }
+
+}
+
+async function gnomesort(){
+    let items = document.querySelectorAll(".item");
+    let index =0;
+    while(index < items.length){
+        items[index].style.backgroundColor = "#95CD41";
+        if(index==0){
+            index++;
+        }
+        let a = parseInt(items[index].innerText);
+        let b = parseInt(items[index-1].innerText);
+        
+        if(a>=b){
+            index++;
+        }
+        else{
+            swap(items[index], items[index-1]);
+            index--;
+        }
+        items[index].style.backgroundColor = "#FF6464";
+        await new Promise((resolve)=>
+            setTimeout(()=>{
+                resolve();
+            },delay)
+        );  
+        
+        
+    }
+    
 
 }
 generatearray();
