@@ -6,11 +6,13 @@ const bubble = document.querySelector("#bubblesort");
 const bogo = document.querySelector("#bogosort");
 const selection = document.querySelector("#selectionsort");
 const quicksort = document.querySelector("#quicksort");
+const insertion =  document.querySelector("#insertionsort");
 bubble.addEventListener("click",()=>{
     bubble.disabled=true;
     bogo.disabled=true;
     selection.disabled=true;
     quicksort.disabled=true;
+    insertion.disabled=true;
     bubblesort();
     
 });
@@ -20,6 +22,7 @@ bogo.addEventListener("click", ()=>{
     bogo.disabled=true;
     selection.disabled=true;
     quicksort.disabled=true;
+    insertion.disabled=true;
     bogosort();
     
 });
@@ -29,6 +32,7 @@ selection.addEventListener("click", ()=>{
     bogo.disabled=true;
     selection.disabled=true;
     quicksort.disabled=true;
+    insertion.disabled=true;
     selectionsort();
 });
 
@@ -37,9 +41,18 @@ quicksort.addEventListener("click",()=>{
     bogo.disabled=true;
     selection.disabled=true;
     quicksort.disabled=true;
+    insertion.disabled=true;
     quicksortImpl();
-})
+});
 
+insertion.addEventListener("click", ()=>{
+    bubble.disabled=true;
+    bogo.disabled=true;
+    selection.disabled=true;
+    quicksort.disabled=true;
+    insertion.disabled=true;
+    insertionsort();
+})
 
 
 function changespeed(val){
@@ -50,7 +63,7 @@ function changespeed(val){
 function generatearray(num=50){
     container.innerHTML="";
     for(let i=0; i<num; i+=1){
-        var value=Math.ceil(Math.random()*100);
+        var value=Math.ceil(Math.random()*150);
         var element = document.createElement("div");
         element.classList.add("item");
         element.style.height= `${value*3 +12}px`;
@@ -259,7 +272,62 @@ async function quicksortImpl(){
 
 }
 
+
+async function insertionsort(){
+    let items = document.querySelectorAll(".item");
+
+    items[0].style.backgroundColor ="#95CD41";
+    for(let i=1; i<items.length; i++){
+
+        let key=parseInt(items[i].innerText);
+        let height = items[i].style.height;
+
+        let j = i-1;
+        
+        items[i].style.backgroundColor = "#F1D00A";
+        await new Promise((resolve)=>
+            setTimeout(()=>{
+                resolve();
+            },delay)
+        );
+        items[i].style.backgroundColor ="#95CD41";
+        while(j>=0 && parseInt(items[j].innerText)>key){
+            items[j].style.backgroundColor = "#139487";
+
+            items[j+1].style.height = items[j].style.height;
+            items[j+1].innerText = items[j].innerText;
+
+            j--;
+            
+
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            );  
+            items[j+1].style.backgroundColor = "#FF6464";
+
+            for(let i =0; i<j; i++){
+                items[i].style.backgroundColor = "#95CD41";
+            }
+            
+        }
+        
+        items[j+1].style.height = height;
+        items[j+1].innerText = key;
+
+        await new Promise((resolve)=>
+            setTimeout(()=>{
+                resolve();
+            },delay)
+        );
+
+        
+    }
+
+}
 generatearray();
+
 
 
 

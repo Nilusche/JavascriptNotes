@@ -15,7 +15,7 @@ p +button, button+button{
     height:500px;
     grid-gap: 5px;;
     margin-left: 20px;
-    margin-top:20px;
+    margin-top:100px;
     transform: scaleY(-1);
     justify-content: center;
     
