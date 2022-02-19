@@ -7,6 +7,7 @@
     <meta name="viewport" content=
         "width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="slider.css">
 </head>
   
 <body>
@@ -32,24 +33,25 @@
         <button id="quicksort">Quicksort</button>
         <button id="heapsort">Heapsort</button>
         <button id="bogosort">Bogosort</button>
-        <button onclick="window.location.reload()">Generate Array</button>
+        
         <div style="text-align:  center;">
-            <label  id="speed" style="color:#eee">Speed</label>
-            <input style="margin-top: 5px" id=speed type="range" min="30" max="1000", value="300" step="10" onchange="changespeed(this.value)">
+            <label  id="speed" style="color:#eee">Slow down</label>
+             <Input class="range" type="range" value="300" min="30" max="1000" onChange="changespeed(this.value)" onmousemove="changespeed(this.value)"></Input>
+            <span id="rangevalue">0</span>
         </div>
         
     </div>
     
-
-    
-    
-
-    
     <div id="array">
     </div>
     
-   <script src="sorts.js"></script>
+    <div class="generatecontainer">
+        <button onclick="window.location.reload()">Stop / Generate new Array</button>
+    </div>
 
+   
+   
+    <script src="sorts.js"></script>
 
 </body>
   

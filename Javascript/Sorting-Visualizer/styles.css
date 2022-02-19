@@ -14,6 +14,15 @@ body{
 p +button, button+button{
     color:#eee;
 }
+.generatecontainer{
+    display:grid;
+    grid-template-columns: repeat(2,500px);
+    margin-left:13em;
+    min-width: 100em;
+    max-width: 10em;;
+    margin-top:5em;
+    height:65px;
+}
 .buttoncontainer{
     display:grid;
     grid-template-columns: repeat(9,1fr);
@@ -46,6 +55,28 @@ p +button, button+button{
     transform: rotateY(180deg);
 }
 
+/*3D84A8
+//46CDCF
+//ABEDD8
+*/
+
+@keyframes color {
+    0%{
+        color:#3D84A8;
+    }
+    25%{
+        color:#46CDCF;
+    }
+    50%{
+        color: #ABEDD8;
+    }
+    75%{
+        color:#46CDCF;
+    }
+    100%{
+        color:#3D84A8;
+    }
+}
 
 b{
     font-size: 30px;
@@ -54,8 +85,10 @@ b{
     color: #edf0f1;
     cursor: pointer;
     margin-right: auto;
+    animation: color 5s ease-in-out infinite;
     
 }
+
 header + h2, div+ h2{
     margin-left:9em;
     margin-top:1em;
@@ -133,7 +166,7 @@ img{
     transition: all 0.3s ease 0s;
 }
 .nav__links li a:hover{
-    color:#DA1212;
+    color:rgba(21, 183, 185, 1);
 }
 
 li ~ li{
@@ -142,7 +175,7 @@ li ~ li{
 
 button{
     padding:9px 25px;
-    background-color: rgba(218, 18, 18, 1);
+    background-color: rgba(21, 183, 185, 1);
     border:none;
     border-radius: 50px;
     cursor: pointer;
@@ -150,11 +183,11 @@ button{
     margin-left:10px;
 }
 button:hover{
-    background-color: rgba(218, 18, 18, 0.8);
+    background-color: rgba(21, 183, 185, 0.8);
     
 }
 button:disabled{
-    background-color: rgba(218, 18, 18, 0.5);
+    background-color: rgba(21, 183, 185, 0.5);
 }
 
 li, a, button{

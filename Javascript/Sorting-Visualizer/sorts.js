@@ -61,6 +61,7 @@ heap.addEventListener("click",()=>{
 
 function changespeed(val){
     delay = parseInt(val);
+    document.querySelector("#rangevalue").innerHTML = val +"ms";
 }
 
 
