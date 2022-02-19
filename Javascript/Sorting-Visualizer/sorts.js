@@ -73,6 +73,7 @@ function generatearray(num=50){
         element.style.height= `${value*3 +12}px`;
         element.transform = `translate(${i*30}px)`;
         element.innerText = value;
+        element.style.backgroundColor = "#FF6464";
         container.appendChild(element);
     }
 }
@@ -342,6 +343,9 @@ async function insertionsort(){
 
         
     }
+    items.forEach((element)=>{
+        element.style.backgroundColor ="#95CD41";
+    })
 
 }
 
