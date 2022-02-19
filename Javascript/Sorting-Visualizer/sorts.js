@@ -179,7 +179,7 @@ async function selectionsort(){
         await new Promise((resolve)=>
             setTimeout(()=>{
                 resolve();
-            },delay)
+            },delay-10)
         );
 
         items[i].style.backgroundColor = "#FF6464";
@@ -192,7 +192,7 @@ async function selectionsort(){
             await new Promise((resolve)=>
                 setTimeout(()=>{
                     resolve();
-                },delay)
+                },delay-10)
             );
             items[j].style.backgroundColor = "#FF6464";
 
@@ -311,7 +311,7 @@ async function insertionsort(){
         );
         items[i].style.backgroundColor ="#95CD41";
         while(j>=0 && parseInt(items[j].innerText)>key){
-            items[j].style.backgroundColor = "#139487";
+            items[j].style.backgroundColor = "#FF1700";
 
             items[j+1].style.height = items[j].style.height;
             items[j+1].innerText = items[j].innerText;
