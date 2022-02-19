@@ -8,67 +8,54 @@ const selection = document.querySelector("#selectionsort");
 const quicksort = document.querySelector("#quicksort");
 const insertion =  document.querySelector("#insertionsort");
 const gnome = document.querySelector("#gnomesort");
-bubble.addEventListener("click",()=>{
+const heap = document.querySelector("#heapsort");
+
+function disableButtons(){
     bubble.disabled=true;
     bogo.disabled=true;
     selection.disabled=true;
     quicksort.disabled=true;
     insertion.disabled=true;
     gnome.disabled =true;
+    heap.disabled =true;
+}
+bubble.addEventListener("click",()=>{
+    disableButtons();
     bubblesort();
     
 });
 
 bogo.addEventListener("click", ()=>{  
-    bubble.disabled=true;
-    bogo.disabled=true;
-    selection.disabled=true;
-    quicksort.disabled=true;
-    insertion.disabled=true;
-    gnome.disabled =true;
+    disableButtons();
     bogosort();
     
 });
 
 selection.addEventListener("click", ()=>{
-    bubble.disabled=true;
-    bogo.disabled=true;
-    selection.disabled=true;
-    quicksort.disabled=true;
-    insertion.disabled=true;
-    gnome.disabled =true;
+    disableButtons();
     selectionsort();
 });
 
-quicksort.addEventListener("click",()=>{
-    bubble.disabled=true;
-    bogo.disabled=true;
-    selection.disabled=true;
-    quicksort.disabled=true;
-    insertion.disabled=true;
-    gnome.disabled =true;
+quicksort.addEventListener("click",async ()=>{
+    disableButtons();
     quicksortImpl();
+
 });
 
 insertion.addEventListener("click", ()=>{
-    bubble.disabled=true;
-    bogo.disabled=true;
-    selection.disabled=true;
-    quicksort.disabled=true;
-    insertion.disabled=true;
-    gnome.disabled =true;
+    disableButtons();
     insertionsort();
 });
 
 gnome.addEventListener("click", ()=>{
-    bubble.disabled=true;
-    bogo.disabled=true;
-    selection.disabled=true;
-    quicksort.disabled=true;
-    insertion.disabled=true;
-    gnome.disabled =true;
+    disableButtons();
     gnomesort();
 });
+
+heap.addEventListener("click",()=>{
+    disableButtons();
+    heapsortImpl();
+})
 
 
 
@@ -89,6 +76,20 @@ function generatearray(num=50){
         container.appendChild(element);
     }
 }
+
+async function endsort(items){    
+    for(let i=0; i< items.length; i++){
+        
+        items[i].style.backgroundColor ="#95CD41";
+        await new Promise((resolve)=>
+            setTimeout(()=>{
+                resolve();
+            },50)
+        );
+    }
+
+}
+
 
 function swap(element1, element2, changecolor=false){
 
@@ -212,13 +213,16 @@ async function selectionsort(){
     }
     items[items.length-1].style.backgroundColor = "#95CD41";
 }
+function parse(){
+    
 
+}
 
 async function quicksortImpl(){
-    let items = document.querySelectorAll(".item");
-        
-    quicksort(items, 0 , parseInt(items.length-1)); 
     
+    let items = document.querySelectorAll(".item");
+    quicksort(items, 0, items.length-1);
+
 
     async function quicksort(items, low, high){
         if(parseInt(low)<parseInt(high)){
@@ -266,21 +270,18 @@ async function quicksortImpl(){
                     resolve();
                 },delay)
             );
-
-            var promise = Promise.all(quicksort(items, low, partitionIndex-1),quicksort(items, partitionIndex +1, high));
-            promise.then(function(){
-                for(let i=low; i<=high; i++){
-                    items[i].style.backgroundColor ="#95CD41";
-
-                }
-            })
-            
+            quicksort(items, low, partitionIndex-1);
             await new Promise((resolve)=>
                 setTimeout(()=>{
                     resolve();
                 },delay)
             );
-            
+            quicksort(items, partitionIndex +1, high);
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            );
             
         }
     }
@@ -374,7 +375,185 @@ async function gnomesort(){
     
 
 }
+
+async function mergeSortImpl(){
+    let items = document.querySelectorAll(".item");
+    
+    mergesort(items, 0, parseInt(items.length-1));
+    
+    async function mergesort(arr, l,r){
+        if (l < r)
+        {
+            
+            let m = l + Math.floor((r - l) / 2);
+
+            mergesort(arr, l, m);
+            mergesort(arr, m + 1, r);
+
+            merge(arr, l, m, r);
+        }
+        
+
+    }
+    
+    async function merge(arr, start, mid, end){
+        let start2 = mid + 1;
+      
+        if (parseInt(arr[mid].innerText) > parseInt(arr[start2].innerText))
+        {
+           
+            while (start <= mid && start2 <= end)
+            {
+
+                if (parseInt(arr[start].innerText) <= parseInt(arr[start2].innerText))
+                {
+                    start++;
+                }
+                else
+                {
+                    let valueHeight = arr[start2].style.height;;
+                    let valueText = arr[start2].innerText;
+                    let index = start2;
+        
+
+                    while (index != start)
+                    {
+                        arr[index].style.height = arr[index - 1].style.height;
+                        arr[index].innerText = arr[index-1].innerText;
+                        index--;
+                        await new Promise((resolve)=>
+                            setTimeout(()=>{
+                                resolve();
+                            },delay)
+                        );  
+                    }
+                    arr[start].style.height = valueHeight;
+                    arr[start].innerText = valueText;
+        
+                    start++;
+                    mid++;
+                    start2++;
+                    await new Promise((resolve)=>
+                        setTimeout(()=>{
+                            resolve();
+                        },delay)
+                    );  
+                }
+            }
+               
+        }
+    
+    }
+    
+}
+//FF6464
+async function heapsortImpl(){
+    let items = document.querySelectorAll(".item");
+    heapsort(items, items.length);
+    
+    async function heapsort(items, count){
+        //heapify
+        let start = parseInt((count -2 )/2);
+        while(start>=0){
+             //siftdown(a, start, count -1)
+            let root = start;
+            let end = count-1;
+            
+            while(root*2+1<=end){
+                let child= root *2+1;
+                
+                if(child+1<=end &&  parseInt(items[child].innerText) < parseInt(items[child+1].innerText)){
+                    items[child].style.backgroundColor = "#F1D00A";
+                    items[child+1].style.backgroundColor = "#F1D00A";
+                    items[root].style.backgroundColor = "#5800FF";
+                    await new Promise((resolve)=>
+                        setTimeout(()=>{
+                            resolve();
+                        },delay-10)
+                    ); 
+                    items[child].style.backgroundColor = "#FF6464";
+                    items[child+1].style.backgroundColor = "#FF6464";
+                    items[root].style.backgroundColor = "#FF6464";
+                    child++;
+                }
+                if(parseInt(items[root].innerText) < parseInt(items[child].innerText)){
+                    items[root].style.backgroundColor = "#5800FF";
+                    swap(items[root], items[child]);
+                    await new Promise((resolve)=>
+                        setTimeout(()=>{
+                            resolve();
+                        },delay)
+                    );  
+                    items[root].style.backgroundColor = "#FF6464";
+                    root = child;
+                }
+                else{
+                    break;
+                }
+            }
+            start--;
+            //
+            
+            
+        }
+        items[0].style.backgroundColor = "#F9ED69";
+        //
+        let end2 = count -1;
+        while(end2>0){
+            items[end2].style.backgroundColor = "#95CD41";
+            items[0].style.backgroundColor = "#F9ED69";
+            swap(items[end2], items[0]);
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            );  
+            end2--;
+
+            let root1 = 0;
+
+            //siftdown(a, 0, end)
+            while(root1*2+1<=end2){
+                let child1= root1 *2+1;
+                if(child1+1<=end2 &&  parseInt(items[child1].innerText) < parseInt(items[child1+1].innerText)){
+                    items[child1].style.backgroundColor = "#F1D00A";
+                    items[child1+1].style.backgroundColor = "#F1D00A";
+                    items[root1].style.backgroundColor = "#5800FF";
+                    await new Promise((resolve)=>
+                        setTimeout(()=>{
+                            resolve();
+                        },delay-10)
+                    ); 
+                    items[child1].style.backgroundColor = "#FF6464";
+                    items[child1+1].style.backgroundColor = "#FF6464";
+                    items[root1].style.backgroundColor = "#FF6464";
+                    child1++;
+                }
+                if(parseInt(items[root1].innerText) < parseInt(items[child1].innerText)){
+                    items[root1].style.backgroundColor = "#5800FF";
+                    swap(items[root1], items[child1]);
+                    await new Promise((resolve)=>
+                        setTimeout(()=>{
+                            resolve();
+                        },delay)
+                    );  
+                    items[root1].style.backgroundColor = "#FF6464";
+                    root1 = child1;
+                }
+                else{
+                    break;
+                }
+            }
+             
+
+        }
+        items[end2].style.backgroundColor = "#95CD41";
+    }
+    
+}
+
 generatearray();
+
 
 
 
