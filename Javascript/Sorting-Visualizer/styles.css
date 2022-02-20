@@ -205,10 +205,6 @@ header{
     padding: 30px 10%;
 }
 
-#sortedAsc, #sortedDesc{
-    display:none;;
-}
-
 #reset, .none{
     padding:9px 25px;
     background-color: rgba(252, 79, 79, 1);
