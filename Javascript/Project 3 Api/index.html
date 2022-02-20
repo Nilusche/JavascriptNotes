@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Spotify Artist Searcher</title>
+</head>
+<body>
+    <div class="container my-5 mx-auto">
+
+        <h1 class="text-white text-center my-4">Spotify Artist Searcher <img src="https://img.icons8.com/fluency/48/000000/spotify.png"/></h1>
+    
+        <form id="searchartist" class="change-location my-4 text-center text-white">
+          <label for="artist">Enter a name or track and press Enter to search for an Artist</label>
+          <input type="text" id=artist name="artist" class="form-control p-4">
+        </form>
+        
+        <div class="card shadow-lg rounded">
+          <img id=pic src="https://via.placeholder.com/300x300" class="time card-img-top">
+          <div class="icon bg-light mx-auto text-center">
+            <!-- icon here later -->
+          </div>
+          <div class="text-muted text-uppercase text-center details">
+            <h5 id="followers" class="my-3">followers</h5>
+            <div id="genres" class="my-3"></div>
+            <div class="display-4 my-4">
+              <span id="name">Artist</span>
+            </div>
+          </div>
+        </div>
+        
+    </div> 
+    <script src="app.js"></script>
+</body>
+</html>
