@@ -39,6 +39,7 @@
              <Input class="range" type="range" value="300" min="30" max="1000" onChange="changespeed(this.value)" onmousemove="changespeed(this.value)"></Input>
             <span id="rangevalue">0</span>
         </div>
+        <button id="reset" onclick="window.location.reload();">Reset</button>
         
     </div>
     
@@ -46,13 +47,34 @@
     </div>
     
     <div class="generatecontainer">
-        <button onclick="window.location.reload()">Stop / Generate new Array</button>
+        <button id="randomArray">Generate new Array</button>
+        <button class="none" id="sortedAsc">Set Values to sorted (ascending)</button>
+        <button class="none" id="sortedDesc">Set Values to sorted (descending)</button>
     </div>
 
-   
-   
-    <script src="sorts.js"></script>
 
+
+    <script src="sorts.js"></script>
+    <script type="text/javascript">
+        let  rand= document.getElementById("randomArray");
+        let asc = document.getElementById("sortedAsc");
+        let desc = document.getElementById("sortedDesc");
+        rand.addEventListener("click", ()=>{
+            generatearray(1, false);
+            let buttons = document.querySelectorAll(".none");
+            buttons.forEach((e)=>{
+                e.style.display="block";
+            })
+        });
+        
+        asc.addEventListener("click", ()=>{
+            generatearray(2,true);
+        });
+        desc.addEventListener("click",()=>{
+            generatearray(2,false);  
+        });
+
+    </script>
 </body>
   
 </html>

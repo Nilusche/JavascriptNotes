@@ -64,8 +64,21 @@ function changespeed(val){
     document.querySelector("#rangevalue").innerHTML = val +"ms";
 }
 
+function generatearray(type=1, asc)
+{
+    container.innerHTML='';
+    if(type==1){
+        generaterandomarray(50);
 
-function generatearray(num=50){
+    }else{
+        if(!asc){
+            generateSortedArray(50, true);
+        }else{
+            generateSortedArray(50,false);
+        }
+    }
+}
+function generaterandomarray(num=50){
     container.innerHTML="";
     for(let i=0; i<num; i+=1){
         var value=Math.ceil(Math.random()*150);
@@ -78,6 +91,36 @@ function generatearray(num=50){
         container.appendChild(element);
     }
 }
+
+function generateSortedArray(num=50, asc=true){
+    if(!asc){
+        for(let i=0; i<num; i+=1){
+                var value=i +1 +2*i;
+                var element = document.createElement("div");
+                element.classList.add("item");
+                element.style.height= `${value*3 +12}px`;
+                element.transform = `translate(${i*30}px)`;
+                element.innerText = value;
+                element.style.backgroundColor = "#FF6464";
+                container.appendChild(element);
+        }
+    }
+    else{
+        for(let i=num; i>0; i--){
+            var value=i +1 +2*i;
+            var element = document.createElement("div");
+            element.classList.add("item");
+            element.style.height= `${value*3 +12}px`;
+            element.transform = `translate(${i*30}px)`;
+            element.innerText = value;
+            element.style.backgroundColor = "#FF6464";
+            container.appendChild(element);
+        }
+    }
+}
+    
+
+    
 
 async function endsort(items){    
     for(let i=0; i< items.length; i++){
@@ -557,8 +600,7 @@ async function heapsortImpl(){
     
 }
 
-generatearray();
-
+generatearray(1,false);
 
 
 

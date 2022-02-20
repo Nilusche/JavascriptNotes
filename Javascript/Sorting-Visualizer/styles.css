@@ -16,12 +16,12 @@ p +button, button+button{
 }
 .generatecontainer{
     display:grid;
-    grid-template-columns: repeat(2,500px);
+    grid-template-columns: repeat(3,500px);
     margin-left:13em;
     min-width: 100em;
     max-width: 10em;;
     margin-top:5em;
-    height:65px;
+    height:60px;
 }
 .buttoncontainer{
     display:grid;
@@ -204,3 +204,25 @@ header{
     align-items: center;
     padding: 30px 10%;
 }
+
+#sortedAsc, #sortedDesc{
+    display:none;;
+}
+
+#reset, .none{
+    padding:9px 25px;
+    background-color: rgba(252, 79, 79, 1);
+    border:none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    margin-left:10px;
+}
+#reset:hover, .none:hover{
+    background-color: rgba(252, 79, 79, 0.8);
+    
+}
+#reset:disabled, .none:disabled{
+    background-color: rgba(252, 79, 79, 0.5);
+}
+
