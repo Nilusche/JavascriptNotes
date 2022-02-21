@@ -20,17 +20,16 @@ function disableButtons(){
     insertion.disabled=true;
     gnome.disabled =true;
     heap.disabled =true;
+    cocktail.disabled = true;
 }
 bubble.addEventListener("click",()=>{
     disableButtons();
     bubblesort();
-    
 });
 
 bogo.addEventListener("click", ()=>{  
     disableButtons();
     bogosort();
-    
 });
 
 selection.addEventListener("click", ()=>{
@@ -41,7 +40,6 @@ selection.addEventListener("click", ()=>{
 quicksort.addEventListener("click",async ()=>{
     disableButtons();
     quicksortImpl();
-
 });
 
 insertion.addEventListener("click", ()=>{
