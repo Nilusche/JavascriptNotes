@@ -9,6 +9,8 @@ const quicksort = document.querySelector("#quicksort");
 const insertion =  document.querySelector("#insertionsort");
 const gnome = document.querySelector("#gnomesort");
 const heap = document.querySelector("#heapsort");
+const cocktail = document.querySelector("#cocktailsort");
+
 
 function disableButtons(){
     bubble.disabled=true;
@@ -55,6 +57,11 @@ gnome.addEventListener("click", ()=>{
 heap.addEventListener("click",()=>{
     disableButtons();
     heapsortImpl();
+});
+
+cocktail.addEventListener("click",()=>{
+    disableButtons();
+    cocktailsort();
 })
 
 
@@ -598,6 +605,72 @@ async function heapsortImpl(){
         items[end2].style.backgroundColor = "#95CD41";
     }
     
+}
+async function cocktailsort(){
+    let items = document.querySelectorAll(".item");
+    let swapped = true;
+    let start = 0;
+    let end = items.length;
+    while(swapped == true){
+        swapped  = false;
+
+        for(let i = start; i<end-1; ++i){
+            let itemI = parseInt(items[i].innerText);
+            let itemI2 = parseInt(items[i+1].innerText);
+            items[i].style.backgroundColor = "#126E82";
+            items[i+1].style.backgroundColor = "#126E82";
+            if(itemI>itemI2){
+                swap(items[i], items[i+1]);
+                swapped = true;
+            }
+            
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            ); 
+            items[i].style.backgroundColor = "#FF6464";
+            items[i+1].style.backgroundColor = "#FF6464";
+            
+        }
+        
+        if(swapped  == false)
+            break;
+        swapped = false;
+        end = end-1;
+        for(let i = items.length-1; i>=end; i--){
+            items[i].style.backgroundColor = "#95CD41";
+        }
+
+        for(let j = end-1; j>=start; --j){
+            let itemI = parseInt(items[j].innerText);
+            let itemI2 = parseInt(items[j+1].innerText);
+            items[j].style.backgroundColor = "#126E82";
+            items[j+1].style.backgroundColor = "#126E82";
+            if(itemI>itemI2){
+                swap(items[j], items[j+1]);
+                swapped = true;
+            }
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            ); 
+            items[j].style.backgroundColor = "#FF6464";
+            items[j+1].style.backgroundColor = "#FF6464";
+        }
+        start = start +1;
+
+        for(let i = 0; i<start; i++){
+            items[i].style.backgroundColor = "#95CD41";
+        }
+        
+        
+    }
+    items.forEach((e)=>{
+        e.style.backgroundColor = "#95CD41";
+    })
+
 }
 
 generatearray(1,false);
