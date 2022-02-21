@@ -10,6 +10,7 @@ const insertion =  document.querySelector("#insertionsort");
 const gnome = document.querySelector("#gnomesort");
 const heap = document.querySelector("#heapsort");
 const cocktail = document.querySelector("#cocktailsort");
+const merge = document.querySelector("#mergesort");
 var sorted = false;
 
 function disableButtons(){
@@ -21,6 +22,7 @@ function disableButtons(){
     gnome.disabled =true;
     heap.disabled =true;
     cocktail.disabled = true;
+    merge.disabled = true;
 }
 bubble.addEventListener("click",()=>{
     disableButtons();
@@ -61,6 +63,10 @@ heap.addEventListener("click",()=>{
 cocktail.addEventListener("click",()=>{
     disableButtons();
     cocktailsort();
+})
+merge.addEventListener("click",()=>{
+    disableButtons();
+    mergeSortImpl();
 })
 
 
@@ -432,8 +438,10 @@ async function gnomesort(){
 async function mergeSortImpl(){
     let items = document.querySelectorAll(".item");
     
-    mergesort(items,0 , items.length-1);
-    
+    await mergesort(items,0 , items.length-1);
+        items.forEach((e)=>{
+        e.style.backgroundColor="#95CD41";
+    })
     async function mergesort(arr, l, r){
         if(l<r){
             let m = l + Math.floor((r-l)/2);
