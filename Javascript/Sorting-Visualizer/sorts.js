@@ -10,7 +10,7 @@ const insertion =  document.querySelector("#insertionsort");
 const gnome = document.querySelector("#gnomesort");
 const heap = document.querySelector("#heapsort");
 const cocktail = document.querySelector("#cocktailsort");
-
+var sorted = false;
 
 function disableButtons(){
     bubble.disabled=true;
@@ -37,9 +37,10 @@ selection.addEventListener("click", ()=>{
     selectionsort();
 });
 
-quicksort.addEventListener("click",async ()=>{
+quicksort.addEventListener("click",()=>{
     disableButtons();
     quicksortImpl();
+    
 });
 
 insertion.addEventListener("click", ()=>{
@@ -273,7 +274,6 @@ async function quicksortImpl(){
     let items = document.querySelectorAll(".item");
     quicksort(items, 0, items.length-1);
 
-
     async function quicksort(items, low, high){
         if(parseInt(low)<parseInt(high)){
 
@@ -432,70 +432,85 @@ async function gnomesort(){
 async function mergeSortImpl(){
     let items = document.querySelectorAll(".item");
     
-    mergesort(items, 0, parseInt(items.length-1));
+    mergesort(items,0 , items.length-1);
     
-    async function mergesort(arr, l,r){
-        if (l < r)
-        {
+    async function mergesort(arr, l, r){
+        if(l<r){
+            let m = l + Math.floor((r-l)/2);
+            await mergesort(arr, l, m);
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            );  
+            await mergesort(arr, m + 1, r);
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            );  
+            await merge(arr, l, m, r);
             
-            let m = l + Math.floor((r - l) / 2);
-
-            mergesort(arr, l, m);
-            mergesort(arr, m + 1, r);
-
-            merge(arr, l, m, r);
         }
-        
-
     }
     
     async function merge(arr, start, mid, end){
-        let start2 = mid + 1;
-      
-        if (parseInt(arr[mid].innerText) > parseInt(arr[start2].innerText))
-        {
-           
-            while (start <= mid && start2 <= end)
-            {
-
-                if (parseInt(arr[start].innerText) <= parseInt(arr[start2].innerText))
-                {
+        let start2 = mid +1;
+        arr[start2].style.backgroundColor = "#219F94";
+        arr[start].style.backgroundColor = "#139487";
+        await new Promise((resolve)=>
+            setTimeout(()=>{
+                resolve();
+            },delay-10)
+        );  
+        arr[start2].style.backgroundColor = "#FF6464";
+        arr[start].style.backgroundColor = "#FF6464";
+        if(parseInt(arr[mid].innerText)>parseInt(arr[start2].innerText)){
+            while(start<=mid&&start2<=end){
+                
+                if(parseInt(arr[start].innerText)<=parseInt(arr[start2].innerText)){
                     start++;
                 }
-                else
-                {
-                    let valueHeight = arr[start2].style.height;;
+                else{
+                    let valueHeight  = arr[start2].style.height;
                     let valueText = arr[start2].innerText;
                     let index = start2;
-        
-
-                    while (index != start)
-                    {
-                        arr[index].style.height = arr[index - 1].style.height;
-                        arr[index].innerText = arr[index-1].innerText;
-                        index--;
+                    
+                    while(index!=start){
+                        arr[index].innerText =arr[index-1].innerText;
+                        arr[index].style.height = arr[index-1].style.height;
+                        
+                        arr[index].style.backgroundColor = "#DA1212";
                         await new Promise((resolve)=>
                             setTimeout(()=>{
                                 resolve();
-                            },delay)
-                        );  
+                            },delay-20)
+                        ); 
+                        arr[index].style.backgroundColor = "#FF6464";
+                        index--;
+                        
                     }
+                     
                     arr[start].style.height = valueHeight;
                     arr[start].innerText = valueText;
-        
                     start++;
                     mid++;
                     start2++;
-                    await new Promise((resolve)=>
-                        setTimeout(()=>{
-                            resolve();
-                        },delay)
-                    );  
+
                 }
+                await new Promise((resolve)=>
+                    setTimeout(()=>{
+                        resolve();
+                    },delay-10)
+                ); 
+                for(let i =start-1; i<=mid; i++){
+                    arr[i].style.backgroundColor = "#95CD41";
+                }
+                
             }
-               
         }
-    
+        
+        
     }
     
 }
@@ -672,7 +687,6 @@ async function cocktailsort(){
 }
 
 generatearray(1,false);
-
 
 
 
