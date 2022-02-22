@@ -11,6 +11,7 @@ const gnome = document.querySelector("#gnomesort");
 const heap = document.querySelector("#heapsort");
 const cocktail = document.querySelector("#cocktailsort");
 const merge = document.querySelector("#mergesort");
+const shell = document.querySelector("#shellsort");
 var sorted = false;
 
 function disableButtons(){
@@ -23,6 +24,7 @@ function disableButtons(){
     heap.disabled =true;
     cocktail.disabled = true;
     merge.disabled = true;
+    shell.disabled = true;
 }
 bubble.addEventListener("click",()=>{
     disableButtons();
@@ -63,11 +65,15 @@ heap.addEventListener("click",()=>{
 cocktail.addEventListener("click",()=>{
     disableButtons();
     cocktailsort();
-})
+});
 merge.addEventListener("click",()=>{
     disableButtons();
     mergeSortImpl();
-})
+});
+shell.addEventListener("click", ()=>{
+    disableButtons();
+    shellsort();
+});
 
 
 
@@ -694,7 +700,49 @@ async function cocktailsort(){
 
 }
 
+async function shellsort(){
+    let items = document.querySelectorAll(".item");
+    let n = items.length;
+    for(let gap=Math.floor(n/2); gap>0; gap=Math.floor(gap/2)){
+        for(let i =parseInt(gap); i<n; i++){
+            
+            let tempVal = items[i].innerText;
+            let tempHeight = items[i].style.height;
+            items[i].style.backgroundColor = "#5800FF";
+            await new Promise((resolve)=>
+                setTimeout(()=>{
+                    resolve();
+                },delay)
+            ); 
+            items[i].style.backgroundColor = "#FF6464";
+            
+            let j;
+            for(j=i; j>=gap && parseInt(items[j-gap].innerText)>parseInt(tempVal); j-=gap){
+                items[j].style.backgroundColor = "#008E89"; 
+                items[j-gap].style.backgroundColor = "#008E89"; 
+                items[j].style.height = items[j-gap].style.height;
+                items[j].innerText = items[j-gap].innerText;
+                await new Promise((resolve)=>
+                    setTimeout(()=>{
+                        resolve();
+                    },delay)
+                ); 
+                items[j].style.backgroundColor = "#FF6464";
+                items[j-gap].style.backgroundColor = "#FF6464"; 
+            }
+            items[j].innerText = tempVal;
+            items[j].style.height = tempHeight;
+        }
+        await new Promise((resolve)=>
+            setTimeout(()=>{
+                resolve();
+            },delay)
+        ); 
+    }
+}
+
 generatearray(1,false);
+
 
 
 
