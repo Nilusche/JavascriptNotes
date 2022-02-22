@@ -739,6 +739,9 @@ async function shellsort(){
             },delay)
         ); 
     }
+    items.forEach((e)=>{
+        e.style.backgroundColor ="#95CD41";
+    });
 }
 
 generatearray(1,false);
