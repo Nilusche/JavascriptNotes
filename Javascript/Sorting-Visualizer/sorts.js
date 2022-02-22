@@ -305,9 +305,10 @@ async function quicksortImpl(){
                 items[j].style.backgroundColor = "#FF6464";
 
                 if(val<pivot){
-                    items[i].style.backgroundColor = "#219F94";    
-                    swap(items[i], items[j],false);    
-                    items[j].style.backgroundColor = "#F1D00A";   
+                    items[i].style.backgroundColor = "#219F94";     
+                    items[j].style.backgroundColor = "#F1D00A";  
+                    swap(items[i], items[j],false);   
+ 
                     i++;    
                     
                 }else{
