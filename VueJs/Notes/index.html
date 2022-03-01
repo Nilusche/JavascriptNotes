@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Start</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        .box{
+            padding: 100px 0;
+            width: 400px;
+            text-align: center;
+            background-color: #ddd;
+            margin:20px;
+            display: inline-block;
+        }
+        .fav{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <!--<div v-if="showBooks">
+            <p>{{title}}</p>
+            <p>{{author}}</p>
+            <p>{{age}}</p>
+            <button v-on:click="age++">Increase Age</button>
+            <button @click="age--">Decrease Age</button>
+            <div @click="changeTitle('myTitle')">Change title</div>
+        </div>
+        <button @click="toggleShowBooks()">
+            <span v-if="showBooks">Hide Box</span>
+            <span v-else>Show Box</span>
+        </button>
+
+        <br>
+        <div class="box" @mouseover="handleEvent($event)">Mouseover</div>
+            <div class="box"@mouseleave="handleEvent">Mouseleave</div>
+            <div class="box"@dblclick="handleEvent">double click</div>
+            <div class="box" @mousemove="handlemousemove">position {{x}} {{y}}</div>
+        </div>
+        -->
+    <ul>
+        <li v-for="book in books" :class="{fav:book.isFav}" @click="togglefav(book)">
+            Title: {{book.title}}, author: {{book.author}}
+        </li>
+    </ul>
+    <a v-bind:href="url">link</a> <br>
+    <a :href="url">Shortcut</a>
+    <script>
+        const app = Vue.createApp({
+           // template:"<h2> I am the template</h2>"
+           data(){
+               return{
+                   title:"Testtitle",
+                   author:"nilusche",
+                   age: 19,
+                   showBooks:  false,    
+                   x:0,
+                   y:0,
+                   books:[
+                       {title: "Cracking the coding interview", author:"gayle laakman", isFav:true},
+                       {title: "Elements of programming in pythons", author:"someone",isFav:false},
+                       {title: "Atomic habits", author:"another one",isFav:true}
+                   ],
+                   url:"https://nilusche.github.io/AlgorithmsVisualizerJS/",
+               }
+           },
+           methods:{
+               /*changeTitle(title){
+                    console.log("clicked");
+                    this.title = title;
+               }, 
+               toggleShowBooks(){
+                   this.showBooks = !this.showBooks;
+               },
+               handleEvent(e){
+                    console.log(e);
+               },
+               handlemousemove(e){
+                    this.x = e.offsetX;
+                    this.y = e.offsetY;
+
+               }*/
+
+               togglefav(book){
+                    book.isFav = !book.isFav;
+               }
+           }
+        });
+        app.mount("#app");
+    </script>
+</body>
+</html>
