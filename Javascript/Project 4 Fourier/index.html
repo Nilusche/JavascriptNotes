@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <canvas id="canvas" width="100" height="100" style="transform:scale(5)"></canvas>
+    <canvas id="canvas" width="100" height="100" ></canvas>
 
     <p><br><br><br><br><br><br><br><br><br><br><br>
     <button id="sub">Generate Image</button>
@@ -40,12 +40,12 @@
         let context = canvas.getContext('2d');
         data = context.getImageData(0,0,100,100);
   ///
-
+        /*
         let f = new Fourier();
         f.writeImagetoComplex(data);
         let transformed = f.transform(true);
         let back = f.transform(false, transformed);
-        console.log(back);
+        console.log(back);*/
         ///
     })
 
