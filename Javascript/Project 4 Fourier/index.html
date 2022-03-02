@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+
+    <canvas id="canvas" width="100" height="100" style="transform:scale(5)"></canvas>
+
+    <p><br><br><br><br><br><br><br><br><br><br><br>
+    <button id="sub">Generate Image</button>
+    <button id="snap">capture</button>
+    <button id="put"> Put previous image</button>
+    </p>
+
+    
+</body>
+<script src="draw.js"></script>
+<script src="fourierTransform.js"></script>
+
+<script >
+    toDataURL('https://picsum.photos/50/50', function(dataUrl) {
+        drawImageFromWebUrl(dataUrl,canvas);
+    })
+    const generate = document.querySelector("#sub");
+    const canvas = document.getElementById("canvas");
+    generate.addEventListener('click', async (e)=>{
+        e.preventDefault();
+        toDataURL('https://picsum.photos/100/100?grayscale', function(dataUrl) {
+            drawImageFromWebUrl(dataUrl,canvas);
+        })
+    })
+
+    var data;
+    const snapshot = document.querySelector("#snap");
+    snapshot.addEventListener('click', function(){
+        let context = canvas.getContext('2d');
+        data = context.getImageData(0,0,100,100);
+  ///
+
+        let f = new Fourier();
+        f.writeImagetoComplex(data);
+        let transformed = f.transform(true);
+        let back = f.transform(false, transformed);
+        console.log(back);
+        ///
+    })
+
+    const put = document.querySelector("#put");
+    put.addEventListener('click', function(){
+        let ctx = canvas.getContext('2d');
+        ctx.putImageData(data, 0,0);
+    })
+    
+
+   function toDataURL(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            var reader = new FileReader();
+            reader.onloadend = function() {
+            callback(reader.result);
+            }
+            reader.readAsDataURL(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+   }
+
+
+   
+</script>
+</html>
