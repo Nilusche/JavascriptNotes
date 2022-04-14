@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>Click</button>
+    <script>
+        const button = document.querySelector("button")
+        button.addEventListener("click",async ()=>{
+            fetch("https://restcountries.com/v3.1/all")
+            .then(Response=>{
+                console.log(Response)
+                return Response.json()
+            })
+            .then(json=>{
+                let countries = json
+                console.log(countries)
+            })
+            .catch(err=>{
+                console.log("error")
+            })
+        })
+    </script>
+</body>
+</html>
