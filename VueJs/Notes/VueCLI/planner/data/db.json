@@ -2,9 +2,9 @@
   "projects": [
     {
       "id": 1,
-      "title": "Create new homepage banner",
-      "details": "Lorem ipsum",
-      "complete": false
+      "title": "Create new homepage",
+      "details": "Create",
+      "complete": true
     },
     {
       "id": 2,

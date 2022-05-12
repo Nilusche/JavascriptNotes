@@ -206,7 +206,7 @@ async function bubblesort(){
 
 async function bogosort(){
     items= document.querySelectorAll(".item");
-    while(!isSorted()) {
+    while(!isSorted(items)) {
         if(stopExec)
             return;
         let a = Math.floor(Math.random() * items.length);
@@ -223,7 +223,7 @@ async function bogosort(){
         items[b].style.backgroundColor = "#FF6464";
     }
 
-    function isSorted() {
+    function isSorted(items) {
         for(let i = 0; i < items.length - 1; i++) {
             if (items[i].innerText > items[i + 1].innerText) return false;
         }
